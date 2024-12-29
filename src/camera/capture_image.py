@@ -1,6 +1,7 @@
-from picamzero import Camera
+from picamera2 import Picamera2
 
-cam = Camera()
-cam.start_preview()
-cam.take_photo("~/embedded/ml/rpc_project/camera_output/image.jpg")
-cam.stop_preview()
+
+picam2 = Picamera2()
+picam2.start()
+picam2.capture_file("src/camera/camera_output/image.jpg")
+picam2.stop()

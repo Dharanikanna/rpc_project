@@ -1,7 +1,7 @@
 #!/bin/bash
 # Setup virtual display
-Xvfb :99 -screen 0 1920x1080x24 &
-export DISPLAY=:99
+# Xvfb :99 -screen 0 1920x1080x24 &
+# export DISPLAY=:99
 
 # Check if /dev/video0 is free
 if lsof /dev/video0; then

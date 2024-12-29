@@ -4,3 +4,30 @@ sudo raspi-config
 verify camera module
     cmd : vcgencmd get_camera
     output : supported=1 detected=1
+
+Latest rasbian os removed manually enabling and disabling options of camera. It has implemented auto camera detection option
+OS : **$uname -a** -> Linux dharanikanna 6.6.62+rpt-rpi-v7 #1 SMP Raspbian 1:6.6.62-1+rpt1 (2024-11-25) armv7l GNU/Linux
+Due to this update we are facing camer interface issue so use beloow commands to fix it
+
+Device Conflict Resolution: Ensure no other processes are using /dev/video0 before starting a new application.
+    Use **lsof /dev/video0** to identify active processes.
+    Use **sudo kill -9 <PID>** to terminate those processes if necessary.
+
+    Testing Camera Functionality:
+        - libcamera-hello confirms the camera is functioning as expected.
+        - Adjust settings or parameters if needed (e.g., resolution, frame rate).
+Note: vcgencmd get_camera will mislead some times as per this document (https://forums.raspberrypi.com/viewtopic.php?t=362707)
+
+Run this command after fixing camera will capture test image
+    - libcamera-jpeg -o /home/dharanikanna/test.jpg
+
+To see streaming output for headless process
+    - Run sudo apt-get install xvfb to install Xvfb.
+    - Xvfb :99 -screen 0 1920x1080x24 & export DISPLAY=:99
+
+ffmpeg: For video capture and processing.
+    - sudo apt install ffmpeg
+
+v4l2-ctl: For querying and configuring camera devices.
+    - sudo apt install v4l-utils
+    - v4l2-ctl --list-devices

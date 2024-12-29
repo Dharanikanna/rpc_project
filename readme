@@ -1,1 +1,6 @@
 Raspberry pi Camera project
+
+sudo raspi-config
+verify camera module
+    cmd : vcgencmd get_camera
+    output : supported=1 detected=1
